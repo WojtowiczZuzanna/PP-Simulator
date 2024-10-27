@@ -8,15 +8,98 @@ namespace Simulator;
 
 public class Creature
 {
-    public string Name { get; set; } = "Unknown";
-    public int Level { get; set; } = 1;
+    private string? name { get; set; } = "Unknown";
+    public string Name
+    {
+        get => name;
+        set
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                name = "###";
+            }
+            else
+            {
 
+                name = value.Trim();
+                name = name.Trim();
+
+                if (name.Length > 25)
+                {
+                    name = name.Substring(0, 25);
+                
+                }
+                name = name.Trim();
+
+                if (name.Length < 3)
+                {
+                    name = name.PadRight(3, '#');
+                }
+
+                if (char.IsLower(name[0]))
+                {
+                    name = char.ToUpper(name[0]) + name.Substring(1);
+                }
+            }
+        }
+    }
+    private int level { get; set; } = 1;
+    public int Level
+    {
+        get => level;
+        set
+        {
+            if (value > 0 && value < 10) 
+            { 
+                level = value;
+            }
+            if (value < 1)
+            {
+                level = 1;
+            }
+
+            if (value > 10)
+            {
+                level = 10;
+            }
+
+
+        }
+    }
     public Creature() { }
 
+    public Creature(string name) { Name = name; }
+    public Creature(int level) { Level = level; }
+    public Creature(string name, int level)
+    {
+        Name = name;
+        Level = level;
+    }
     public string Info => $"{Name} {Level}";
+
 
     public void SayHi()
     {
         Console.WriteLine($"Hi, I'm {Name}, my level is {Level}.");
     }
+
+
+
+    public void Upgrade()
+    {
+        if (level < 10 && level > 0)
+        {
+            level = level + 1;
+        }
+        if (level > 10)
+        {
+            level = 10;
+        }
+        if (level < 1)
+        {
+            level = 1;
+        }
+    }
+
+
 }
