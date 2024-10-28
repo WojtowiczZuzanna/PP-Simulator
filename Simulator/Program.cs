@@ -14,9 +14,13 @@ internal class Program
         Creature c1 = new();
         c1.SayHi();
 
+        Lab3a();
+        Console.WriteLine("\n");
+        Lab3b();
+    }
 
-        static void Lab3a()
-        {
+    static void Lab3a()
+    {
             Creature c = new() { Name = "   Shrek    ", Level = 20 };
             c.SayHi();
             c.Upgrade();
@@ -47,8 +51,28 @@ internal class Program
 
             a = new() { Description = "Mice           are great", Size = 40 };
             Console.WriteLine(a.Info);
-        }
-
-        Lab3a();
     }
+
+
+    static void Lab3b()
+    {
+            Creature c = new("Shrek", 7);
+            c.SayHi();
+
+            Console.WriteLine("\n* Up");
+            c.Go(Direction.Up);
+
+            Console.WriteLine("\n* Right, Left, Left, Down");
+            Direction[] directions = {
+                    Direction.Right, Direction.Left, Direction.Left, Direction.Down
+            };
+            c.Go(directions);
+
+            Console.WriteLine("\n* LRL");
+            c.Go("LRL");
+
+            Console.WriteLine("\n* xxxdR lyyLTyu");
+            c.Go("xxxdR lyyLTyu");
+    }
+    
 }

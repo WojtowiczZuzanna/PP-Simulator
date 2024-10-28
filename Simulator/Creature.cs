@@ -27,7 +27,7 @@ public class Creature
                 if (name.Length > 25)
                 {
                     name = name.Substring(0, 25);
-                
+
                 }
                 name = name.Trim();
 
@@ -49,8 +49,8 @@ public class Creature
         get => level;
         set
         {
-            if (value > 0 && value < 10) 
-            { 
+            if (value > 0 && value < 10)
+            {
                 level = value;
             }
             if (value < 1)
@@ -102,4 +102,23 @@ public class Creature
     }
 
 
+    public void Go(Direction direction)
+    {
+        Console.WriteLine($"{Name} goes {direction.ToString().ToLower()}");
+    }
+
+    public void Go(Direction[] directions)
+    {
+        foreach (var direction in directions)
+        {
+            Go(direction);
+        }
+    }
+
+ 
+    public void Go(string input)
+    {
+        Direction[] directionss = DirectionParser.Parse(input);
+        Go(directionss);
+    }
 }
