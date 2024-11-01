@@ -10,16 +10,55 @@ internal class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Starting Simulator!\n");
-        Console.WriteLine("/* SayHi() adjusts Name and Level and prints them on screen \n-> Upgrade() adds 1 to Level \n-> Info has modified values, which Console puts on screen */\n");
-        Creature c1 = new();
+
+        Lab4a();
+
+        static void Lab4a()
+        {
+            Console.WriteLine("HUNT TEST\n");
+            var o = new Orc() { Name = "Gorbag", Rage = 7 };
+            o.SayHi();
+            for (int i = 0; i < 10; i++)
+            {
+                o.Hunt();
+                o.SayHi();
+            }
+
+            Console.WriteLine("\nSING TEST\n");
+            var e = new Elf("Legolas",1 ,agility: 2);
+            e.SayHi();
+            for (int i = 0; i < 10; i++)
+            {
+                e.Sing();
+                e.SayHi();
+            }
+
+            Console.WriteLine("\nPOWER TEST\n");
+            Creature[] creatures = {
+        o,
+        e,
+        new Orc("Morgash", 3, 8),
+        new Elf("Elandor", 5, 3)
+    };
+            foreach (Creature creature in creatures)
+            {
+                Console.WriteLine($"{creature.Name,-15}: {creature.Power}");
+            }
+        }
+
+        //Console.WriteLine("/* SayHi() adjusts Name and Level and prints them on screen \n-> Upgrade() adds 1 to Level \n-> Info has modified values, which Console puts on screen */\n");
+        /*Creature c1 = new();
         c1.SayHi();
+
+
+
 
         Lab3a();
         Console.WriteLine("\n");
-        Lab3b();
+        Lab3b();*/
     }
 
-    static void Lab3a()
+    /*static void Lab3a()
     {
             Creature c = new() { Name = "   Shrek    ", Level = 20 };
             c.SayHi();
@@ -73,6 +112,6 @@ internal class Program
 
             Console.WriteLine("\n* xxxdR lyyLTyu");
             c.Go("xxxdR lyyLTyu");
-    }
+    }*/
     
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simulator;
 
-public class Creature
+public abstract class Creature
 {
     private string? name { get; set; } = "Unknown";
     public string Name
@@ -78,12 +78,10 @@ public class Creature
     public string Info => $"{Name} {Level}";
 
 
-    public void SayHi()
+    public virtual void SayHi()
     {
         Console.WriteLine($"Hi, I'm {Name}, my level is {Level}.");
     }
-
-
 
     public void Upgrade()
     {
@@ -121,4 +119,12 @@ public class Creature
         Direction[] directionss = DirectionParser.Parse(input);
         Go(directionss);
     }
+
+    private int power;
+    public virtual int Power
+    {
+        get => power; 
+        set { power = value; }
+    }
+
 }
