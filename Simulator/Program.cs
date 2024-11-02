@@ -12,6 +12,8 @@ internal class Program
         Console.WriteLine("Starting Simulator!\n");
 
         Lab4a();
+        Console.WriteLine("\n");
+        Lab4b();
 
         static void Lab4a()
         {
@@ -44,6 +46,28 @@ internal class Program
             {
                 Console.WriteLine($"{creature.Name,-15}: {creature.Power}");
             }
+
+            Creature c = new Elf("Elandor", 5, 3);
+            Console.WriteLine(c);  // ELF: Elandor [5]
+        }
+
+        static void Lab4b()
+        {
+            object[] myObjects = {
+        new Animals() { Description = "dogs"},
+        new Birds { Description = "  eagles ", Size = 10 },
+        new Elf("e", 15, -3),
+        new Orc("morgash", 6, 4)
+    };
+            Console.WriteLine("\nMy objects:");
+            foreach (var o in myObjects) Console.WriteLine(o);
+            /*
+                My objects:
+                ANIMALS: Dogs <3>
+                BIRDS: Eagles (fly+) <10>
+                ELF: E## [10][0]
+                ORC: Morgash [6][4]
+            */
         }
 
         //Console.WriteLine("/* SayHi() adjusts Name and Level and prints them on screen \n-> Upgrade() adds 1 to Level \n-> Info has modified values, which Console puts on screen */\n");

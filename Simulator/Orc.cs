@@ -10,12 +10,13 @@ namespace Simulator;
 public class Orc : Creature
 {
     int rageCount = 0;
-    private int rage { get; set; } = 1;
+    private int rage;
     public int Rage
     {
         get => rage;
-        set
-        {
+        set => rage = Validator.Limiter(value, 0, 10);
+    }
+        /*{
             if (value < 0)
             {
                 rage = 0;
@@ -25,7 +26,7 @@ public class Orc : Creature
                 rage = 10;
             }
         }
-    }
+    }*/
 
     public Orc() : base() { }
     public Orc(string name, int level = 1, int rage =1) : base(name, level)
@@ -48,4 +49,6 @@ public class Orc : Creature
 
     public override int Power => 7 * Level + 3 * Rage;
 
+
+    public override string Info => $"{Name} {Level} {Rage}";
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,12 +11,13 @@ namespace Simulator;
 public class Elf : Creature
 {
     int singCount = 0;
-    private int agility { get; set; } = 1;
+    private int agility;
     public int Agility
     {
         get => agility;
-        private set
-        {
+        private set => agility = Validator.Limiter(value, 0, 10);
+    }
+        /*{
             if (value < 0)
             {
                 value = 0;
@@ -25,7 +27,7 @@ public class Elf : Creature
                 value = 10;
             }
         }
-    }
+    }*/
     public void Sing()
     {
         singCount += 1;
@@ -47,4 +49,5 @@ public class Elf : Creature
 
     public override int Power => 8 * Level + 2 * Agility;
     
+    public override string Info => $"{Name} {Level} {Agility}";
 }

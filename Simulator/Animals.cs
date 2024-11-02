@@ -10,10 +10,8 @@ namespace Simulator;
 public class Animals
 {
     private string description;// = string.Empty;
-
     public required string Description
     {
-
         get => description;
         set
         {
@@ -45,8 +43,15 @@ public class Animals
             }
         }
     }
+
     public uint Size { get; set; } = 3;
 
-    public string Info => $"{Description} <{Size}>";
+    public virtual string Info => $"{Description} <{Size}>";
+
+
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Info}";
+    } 
 
 }

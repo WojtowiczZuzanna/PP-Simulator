@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,12 +9,13 @@ namespace Simulator;
 
 public abstract class Creature
 {
-    private string? name { get; set; } = "Unknown";
+    private string? name;
     public string Name
     {
         get => name;
-        set
-        {
+        set => name = Validator.Shortener(value, 3, 25, '#');
+    }
+        /*{
             if (string.IsNullOrEmpty(value))
             {
                 name = "###";
@@ -41,14 +43,14 @@ public abstract class Creature
                     name = char.ToUpper(name[0]) + name.Substring(1);
                 }
             }
-        }
-    }
-    private int level { get; set; } = 1;
+        }*/
+    
+    private int level;
     public int Level
     {
         get => level;
-        set
-        {
+        set => level = Validator.Limiter(value, 1, 10);
+        /*{
             if (value > 0 && value < 10)
             {
                 level = value;
@@ -64,18 +66,18 @@ public abstract class Creature
             }
 
 
-        }
+        }*/
     }
     public Creature() { }
 
     public Creature(string name) { Name = name; }
     public Creature(int level) { Level = level; }
-    public Creature(string name, int level)
+    public Creature(string name = "Unknown", int level = 1)
     {
         Name = name;
         Level = level;
     }
-    public string Info => $"{Name} {Level}";
+    public virtual string Info  => $"{Name} {Level}";
 
 
     public virtual void SayHi()
@@ -126,5 +128,9 @@ public abstract class Creature
         get => power; 
         set { power = value; }
     }
-
+    
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Info.Split()[0].ToUpper()[0] + Info.Split()[0].Substring(1)} [{Info.Split()[1]}] [{Info.Split()[2]}]";
+    }
 }
