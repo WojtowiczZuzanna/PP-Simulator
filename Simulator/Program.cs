@@ -11,11 +11,40 @@ internal class Program
     {
         Console.WriteLine("Starting Simulator!\n");
 
-        Lab4a();
-        Console.WriteLine("\n");
-        Lab4b();
+        Point p = new(10, 25);
+        Console.WriteLine(p.Next(Direction.Right));          // (11, 25)
+        Console.WriteLine(p.NextDiagonal(Direction.Right));  // (11, 24)
 
-        static void Lab4a()
+        Console.WriteLine("\n");
+        Lab5a();
+
+        static void Lab5a()
+        {
+            Console.WriteLine("Rectangle test\n");
+            try
+            {
+                var r1 = new Rectangle(-6, 7, 4, 1);
+                Console.WriteLine($"Rectangle 1: {r1}");
+
+                Point p1 = new Point(2, 3);
+                Point p2 = new Point(-4, 7);
+
+                var r2 = new Rectangle(p1, p2);
+                Console.WriteLine($"Rectangle 2: {r2}");
+
+                Console.WriteLine($"Is {p1} inside rectangle2? {r2.Contains(p2)}");
+            }
+            catch
+            {
+                Console.WriteLine($"Error");
+            }
+        }
+        /*Lab4a();
+        Console.WriteLine("\n");
+        Lab4b();*/
+
+
+        /*static void Lab4a()
         {
             Console.WriteLine("HUNT TEST\n");
             var o = new Orc() { Name = "Gorbag", Rage = 7 };
@@ -49,9 +78,9 @@ internal class Program
 
             Creature c = new Elf("Elandor", 5, 3);
             Console.WriteLine(c);  // ELF: Elandor [5]
-        }
+        }*/
 
-        static void Lab4b()
+        /*static void Lab4b()
         {
             object[] myObjects = {
         new Animals() { Description = "dogs"},
@@ -67,20 +96,20 @@ internal class Program
                 BIRDS: Eagles (fly+) <10>
                 ELF: E## [10][0]
                 ORC: Morgash [6][4]
-            */
-        }
+            /
+    }*/
 
-        //Console.WriteLine("/* SayHi() adjusts Name and Level and prints them on screen \n-> Upgrade() adds 1 to Level \n-> Info has modified values, which Console puts on screen */\n");
-        /*Creature c1 = new();
-        c1.SayHi();
-
-
+    //Console.WriteLine("/* SayHi() adjusts Name and Level and prints them on screen \n-> Upgrade() adds 1 to Level \n-> Info has modified values, which Console puts on screen */\n");
+    /*Creature c1 = new();
+    c1.SayHi();
 
 
-        Lab3a();
-        Console.WriteLine("\n");
-        Lab3b();*/
-    }
+
+
+    Lab3a();
+    Console.WriteLine("\n");
+    Lab3b();*/
+}
 
     /*static void Lab3a()
     {
