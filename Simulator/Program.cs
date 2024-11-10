@@ -1,6 +1,9 @@
-﻿using System.Reflection.Emit;
+﻿using Simulator.Maps;
+using System.Reflection.Emit;
+using System.Runtime.Serialization;
 using System.Security.Cryptography;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Simulator;
 //file-scoped namespace == with ";"
@@ -17,6 +20,8 @@ internal class Program
 
         Console.WriteLine("\n");
         Lab5a();
+        Console.WriteLine("\n");
+        Lab5b();
 
         static void Lab5a()
         {
@@ -39,6 +44,62 @@ internal class Program
                 Console.WriteLine($"Error");
             }
         }
+
+        static void Lab5b()
+        {
+            try
+            {
+                Console.WriteLine("SmallSquareMap test\n");
+
+                var ssm1 = new SmallSquareMap(15);
+
+                Point p1 = new Point(2, 3);
+                Console.WriteLine(p1);
+
+                p1 = ssm1.Next(p1, Direction.Down);
+                p1 = ssm1.NextDiagonal(p1, Direction.Down);
+                Console.WriteLine(p1);
+
+
+                try
+                {
+                    var ssm2 = new SmallSquareMap(3);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Out of range");
+                }
+
+                try
+                {
+                    Point p2 = new Point(8, 15);
+                    p2 = ssm1.Next(p2, Direction.Right);
+                    p2 = ssm1.NextDiagonal(p2, Direction.Right);
+                    Console.WriteLine(p2);
+
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("Out of range");
+                }
+
+                try
+                {
+                    Point p3 = new Point(0, -4);
+                    bool b = ssm1.Exist(p3);
+                    Console.WriteLine($"Is {p3} on the map? {b}");
+                }
+                catch
+                {
+                    Console.WriteLine("Doesn't exist");
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Error");
+            }
+        }
+
         /*Lab4a();
         Console.WriteLine("\n");
         Lab4b();*/
