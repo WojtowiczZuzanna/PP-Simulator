@@ -15,36 +15,36 @@ public abstract class Creature
         get => name;
         set => name = Validator.Shortener(value, 3, 25, '#');
     }
-        /*{
-            if (string.IsNullOrEmpty(value))
+    /*{
+        if (string.IsNullOrEmpty(value))
+        {
+            name = "###";
+        }
+        else
+        {
+
+            name = value.Trim();
+            name = name.Trim();
+
+            if (name.Length > 25)
             {
-                name = "###";
+                name = name.Substring(0, 25);
+
             }
-            else
+            name = name.Trim();
+
+            if (name.Length < 3)
             {
-
-                name = value.Trim();
-                name = name.Trim();
-
-                if (name.Length > 25)
-                {
-                    name = name.Substring(0, 25);
-
-                }
-                name = name.Trim();
-
-                if (name.Length < 3)
-                {
-                    name = name.PadRight(3, '#');
-                }
-
-                if (char.IsLower(name[0]))
-                {
-                    name = char.ToUpper(name[0]) + name.Substring(1);
-                }
+                name = name.PadRight(3, '#');
             }
-        }*/
-    
+
+            if (char.IsLower(name[0]))
+            {
+                name = char.ToUpper(name[0]) + name.Substring(1);
+            }
+        }
+    }*/
+
     private int level;
     public int Level
     {
@@ -77,13 +77,11 @@ public abstract class Creature
         Name = name;
         Level = level;
     }
-    public virtual string Info  => $"{Name} {Level}";
+    public virtual string Info => $"{Name} {Level}";
 
+    public virtual string Greeting()//virtual void SayHi()
+    => $"Hi, I'm {Name}, my level is {Level}.";
 
-    public virtual void SayHi()
-    {
-        Console.WriteLine($"Hi, I'm {Name}, my level is {Level}.");
-    }
 
     public void Upgrade()
     {
@@ -102,25 +100,21 @@ public abstract class Creature
     }
 
 
-    public void Go(Direction direction)
-    {
-        Console.WriteLine($"{Name} goes {direction.ToString().ToLower()}");
-    }
+    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
 
-    public void Go(Direction[] directions)
+    public string[] Go(Direction[] directions)
     {
-        foreach (var direction in directions)
-        {
-            Go(direction);
+            var result = new string[directions.Length];
+            for (int i = 0; i < directions.Length; i++)
+            {
+                result[i] = Go(directions[i]);
+            }
+            return result;
         }
-    }
+    
 
  
-    public void Go(string input)
-    {
-        Direction[] directionss = DirectionParser.Parse(input);
-        Go(directionss);
-    }
+    public string[] Go(string input) => Go(DirectionParser.Parse(input));
 
     private int power;
     public virtual int Power

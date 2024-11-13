@@ -36,7 +36,7 @@ public class Elf : Creature
             agility += 1;
             singCount = 0;
         }
-        Console.WriteLine($"{Name} is singing.");
+        //Console.WriteLine($"{Name} is singing.");
     }
 
     public Elf() : base() { }
@@ -45,7 +45,7 @@ public class Elf : Creature
         Agility = agility;
     }
 
-    public override void SayHi() => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}.");
+    public override string Greeting() => $"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}.";
 
     public override int Power => 8 * Level + 2 * Agility;
     

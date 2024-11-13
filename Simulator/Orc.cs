@@ -43,9 +43,9 @@ public class Orc : Creature
             rage += 1;
             rageCount = 0;
         }
-        Console.WriteLine($"{Name} is hunting.");
+        //Console.WriteLine($"{Name} is hunting.");
     }
-    public override void SayHi() => Console.WriteLine($"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.");
+    public override string Greeting() => $"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.";
 
     public override int Power => 7 * Level + 3 * Rage;
 
