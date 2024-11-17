@@ -43,7 +43,7 @@ public class Rectangle
 
     public Rectangle(Point p1, Point p2) : this(p1.X, p1.Y, p2.X, p2.Y)
     {
-        Console.WriteLine($"{p1.X} {p1.Y} {p2.X} {p2.Y} ");
+        //Console.WriteLine($"{p1.X} {p1.Y} {p2.X} {p2.Y} ");
     }
 
     public bool Contains(Point point)
