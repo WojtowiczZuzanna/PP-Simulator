@@ -8,40 +8,18 @@ using System.Threading.Tasks;
 
 namespace Simulator.Maps;
 
-public class SmallTorusMap : Map
+public class SmallTorusMap : SmallMap
 {
-    public int Size { get; }
-
-    public SmallTorusMap(int size)
-    {
-        if (size < 5 || size > 20)
-        {
-            throw new ArgumentOutOfRangeException("Point not in the range of the map.");
-        }
-        Size = size;
-    }
-
-    public override bool Exist(Point p)
-    {
-        if (p.X <= 0 || p.Y <= 0 || p.X >= Size || p.Y >= Size)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
 
     public override Point Next(Point p, Direction d)
     {
         Point p1 = p.Next(d);
-        return new Point((p1.X + Size) % Size, (p1.Y + Size) % Size);
+        return new Point((p1.X + SizeX) % SizeX, (p1.Y + SizeY) % SizeY);
     }
 
     public override Point NextDiagonal(Point p, Direction d)
     {
         Point p1 = p.NextDiagonal(d);
-        return new Point((p1.X + Size) % Size, (p1.Y + Size) % Size);
+        return new Point((p1.X + SizeX) % SizeX, (p1.Y + SizeY) % SizeY);
     }
 }
