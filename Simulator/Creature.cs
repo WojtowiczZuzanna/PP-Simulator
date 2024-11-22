@@ -1,72 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Security;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Simulator.Maps;
 
 namespace Simulator;
 
 public abstract class Creature
 {
+    public Map? Map {  get; private set; }
+    public Point Position { get; private set; }
+
+    public void InitMapAndPosition(Map map, Point position) 
+    { 
+    
+    }
+
+
+
     private string? name;
     public string Name
     {
         get => name;
         set => name = Validator.Shortener(value, 3, 25, '#');
     }
-    /*{
-        if (string.IsNullOrEmpty(value))
-        {
-            name = "###";
-        }
-        else
-        {
-
-            name = value.Trim();
-            name = name.Trim();
-
-            if (name.Length > 25)
-            {
-                name = name.Substring(0, 25);
-
-            }
-            name = name.Trim();
-
-            if (name.Length < 3)
-            {
-                name = name.PadRight(3, '#');
-            }
-
-            if (char.IsLower(name[0]))
-            {
-                name = char.ToUpper(name[0]) + name.Substring(1);
-            }
-        }
-    }*/
+  
 
     private int level;
     public int Level
     {
         get => level;
         set => level = Validator.Limiter(value, 1, 10);
-        /*{
-            if (value > 0 && value < 10)
-            {
-                level = value;
-            }
-            if (value < 1)
-            {
-                level = 1;
-            }
-
-            if (value > 10)
-            {
-                level = 10;
-            }
-
-
-        }*/
+ 
     }
     public Creature() { }
 
@@ -101,28 +62,31 @@ public abstract class Creature
 
 
     public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
+    // ma użyc regul mapy
+    //next, czy pozycja jest rowna poprzedniej, zmiana pozycji, aktualizacja przy pomocy move w mapie
 
-    public string[] Go(Direction[] directions)
-    {
-            var result = new string[directions.Length];
-            for (int i = 0; i < directions.Length; i++)
-            {
-                result[i] = Go(directions[i]);
-            }
-            return result;
-        }
-    
+    //out
+    //public string[] Go(Direction[] directions)
+    //{
+    //    var result = new string[directions.Length];
+    //    for (int i = 0; i < directions.Length; i++)
+    //    {
+    //        result[i] = Go(directions[i]);
+    //    }
+    //    return result;
+    //}
 
- 
-    public string[] Go(string input) => Go(DirectionParser.Parse(input));
+    //out
+    //parser =>
+    //public string[] Go(string input) => Go(DirectionParser.Parse(input));
 
     private int power;
     public virtual int Power
     {
-        get => power; 
+        get => power;
         set { power = value; }
     }
-    
+
     public override string ToString()
     {
         return $"{GetType().Name.ToUpper()}: {Info.Split()[0].ToUpper()[0] + Info.Split()[0].Substring(1)} [{Info.Split()[1]}] [{Info.Split()[2]}]";

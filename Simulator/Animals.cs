@@ -13,7 +13,7 @@ public class Animals
     public required string Description
     {
         get => description;
-        set
+        init
         {
             if (string.IsNullOrEmpty(value))
             {

@@ -21,6 +21,7 @@ public class ValidatorTests
     [InlineData("  donkey ", 3, 7, '#', "donkey")]
     [InlineData("Puss in Boots – a clever and brave cat.",0, 15, '#', "Puss in Boots –")]
     [InlineData("A", 3, 5, '#', "A##")]
+    [InlineData("a                   b", 0, 4, '#',"A###")]
     public void Shortener_ShouldReturnCorrectValue(string value, int min, int max, char placeholder, string expected)
     {
         var result = Validator.Shortener(value, min, max, placeholder);

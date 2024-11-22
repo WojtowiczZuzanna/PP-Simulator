@@ -11,7 +11,17 @@ namespace Simulator.Maps;
 /// </summary>
 public abstract class Map
 {
+    public abstract void Add(Creature creature, Point position);
+
+    //remove, move, at(x,y), at(p)
+    public abstract void Remove(Creature creature, Point position);
+    public abstract void Move(Creature creature, Point position, Point position2);
+    public abstract void At(Point position);
+    public abstract void At(int x, int y);
+
+
     private readonly Rectangle _map;
+    
     protected Map(int sizeX, int sizeY)
     {
         if (sizeX < 5)
@@ -30,7 +40,9 @@ public abstract class Map
 
     
     public int SizeX { get; }
-     public int SizeY { get; }
+    public int SizeY { get; }
+
+
     /// <summary>
     /// Check if give point belongs to the map.
     /// </summary>
