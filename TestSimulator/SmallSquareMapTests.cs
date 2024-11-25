@@ -13,7 +13,7 @@ public class SmallSquareMapTests
         // Act
         var map = new SmallSquareMap(size);
         // Assert
-        Assert.Equal(size, map.Size);
+        Assert.Equal((size, size), (map.SizeX, map.SizeY));
 
     }
 
