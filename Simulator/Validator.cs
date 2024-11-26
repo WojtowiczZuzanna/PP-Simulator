@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulator;
+namespace SimConsole;
 
 public static class Validator
 {

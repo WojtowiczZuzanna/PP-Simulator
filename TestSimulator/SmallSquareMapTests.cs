@@ -1,5 +1,5 @@
-﻿using Simulator;
-using Simulator.Maps;
+﻿using SimConsole;
+using SimConsole.Maps;
 
 namespace TestSimulator;
 

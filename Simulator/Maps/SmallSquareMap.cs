@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulator.Maps;
+namespace SimConsole.Maps;
 
 public class SmallSquareMap : SmallMap
 {
@@ -22,14 +22,14 @@ public class SmallSquareMap : SmallMap
     {
         base.Move(creature, position, position2);
     }
-    public override void At(Point position)
+    public override List<Creature>? At(Point position)
     {
-        base.At(position);
+        return base.At(position);
     }
 
-    public override void At(int x, int y)
+    public override List<Creature>? At(int x, int y)
     {
-        base.At(x, y);
+        return base.At(x, y);
     }
 
 

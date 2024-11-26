@@ -1,4 +1,4 @@
-﻿using Simulator;
+﻿using SimConsole;
 using System.Numerics;
 using Xunit;
 

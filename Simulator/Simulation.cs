@@ -1,15 +1,15 @@
-﻿using Simulator.Maps;
+﻿using SimConsole.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulator;
+namespace SimConsole;
 
 public class Simulation
 {
-    int i = 0;
+    private int i = 0;
     /// <summary>
     /// Simulation's map.
     /// </summary>
@@ -37,14 +37,14 @@ public class Simulation
     /// <summary>
     /// Has all moves been done?
     /// </summary>
-    public bool Finished = false;
+    public bool Finished => i >= Moves.Length;
 
     /// <summary>
     /// Creature which will be moving current turn.
     /// </summary>
     public Creature CurrentCreature 
     { 
-        get => Creatures[i]; 
+        get => Creatures[i%Creatures.Count]; 
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ public class Simulation
     /// </summary>
     public string CurrentMoveName
     {
-        get => Moves[i].ToString();
+        get => Moves[i%Moves.Length].ToString();
         
     }
 
@@ -91,52 +91,78 @@ public class Simulation
     /// </summary>
     public void Turn() 
     {
+        if (Finished)
+        {
+            throw new InvalidOperationException("Finished");
+        }
+
         if (CurrentCreature != null)
         {
             Creature creature = CurrentCreature;
             Point position = CurrentCreature.Position;
 
+            Point newPosition = position;
 
+            switch (CurrentMoveName)
+            {
+                case "up":
+                    newPosition = Map.Next(position, Direction.Up);
+                    break;
+                case "right":
+                    newPosition = Map.Next(position, Direction.Right);
+                    break;
+                case "down":
+                    newPosition = Map.Next(position, Direction.Down);
+                    break;
+                case "left":
+                    newPosition = Map.Next(position, Direction.Left);
+                    break;
+                default:
+                    Console.WriteLine("Smth's wrong");
+                    return;
+            }
+
+            Map.Move(creature, position, newPosition);
+            Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
+        }
+
+        i++;
+    }
+}
+
+
+            /*
             if (CurrentMoveName == "up")
             {
                 Point newPosition = Map.Next(position, Direction.Up);
-                Map.Move(CurrentCreature, position, newPosition);
+                Map.Move(creature, position, newPosition);
                 Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
             }
             if (CurrentMoveName == "right")
             {
                 Point newPosition = Map.Next(position, Direction.Right);
-                Map.Move(CurrentCreature, position, newPosition);
+                Map.Move(creature, position, newPosition);
                 Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
             }
             if (CurrentMoveName == "down")
             {
                 Point newPosition = Map.Next(position, Direction.Down);
-                Map.Move(CurrentCreature, position, newPosition);
+                Map.Move(creature, position, newPosition);
                 Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
             }
             if (CurrentMoveName == "left")
             {
                 Point newPosition = Map.Next(position, Direction.Left);
-                Map.Move(CurrentCreature, position, newPosition);
+                Map.Move(creature, position, newPosition);
                 Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
             }
             else
             {
                 Console.WriteLine("Smth's wrong");
             }
-
+            i++;
         }
-        i++;
+        
 
-        if (i >= Creatures.Count)//bo finished ustawione na false
-        {
-            Finished = true;
-        }
-        if (!Finished)
-        {
-            throw new Exception("Simulation is finished");
-
-        }
-    }
-}
+    }*
+}*/

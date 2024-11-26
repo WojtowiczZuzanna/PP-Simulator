@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulator.Maps;
+namespace SimConsole.Maps;
 
 /// <summary>
 /// Map of points.
@@ -16,8 +16,8 @@ public abstract class Map
     //remove, move, at(x,y), at(p)
     public abstract void Remove(Creature creature, Point position);
     public abstract void Move(Creature creature, Point position, Point position2);
-    public abstract void At(Point position);
-    public abstract void At(int x, int y);
+    public abstract List<Creature>? At(Point position);
+    public abstract List<Creature>? At(int x, int y);
 
 
     private readonly Rectangle _map;

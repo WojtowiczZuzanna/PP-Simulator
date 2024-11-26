@@ -1,6 +1,6 @@
-﻿using Simulator.Maps;
+﻿using SimConsole.Maps;
 
-namespace Simulator;
+namespace SimConsole;
 
 public abstract class Creature
 {
@@ -15,7 +15,7 @@ public abstract class Creature
 
 
 
-    private string? name;
+    private string name = "Unknown";
     public string Name
     {
         get => name;
@@ -30,10 +30,10 @@ public abstract class Creature
         set => level = Validator.Limiter(value, 1, 10);
  
     }
-    public Creature() { }
+    //public Creature() { }
 
-    public Creature(string name) { Name = name; }
-    public Creature(int level) { Level = level; }
+    //public Creature(string name) { Name = name; }
+    //public Creature(int level) { Level = level; }
     public Creature(string name = "Unknown", int level = 1)
     {
         Name = name;

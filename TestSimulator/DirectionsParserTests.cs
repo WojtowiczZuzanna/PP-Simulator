@@ -1,4 +1,4 @@
-﻿using Simulator;
+﻿using SimConsole;
 
 namespace TestSimulator;
 

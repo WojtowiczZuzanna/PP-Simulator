@@ -1,6 +1,6 @@
-﻿using Simulator.Maps;
+﻿using SimConsole.Maps;
 
-namespace Simulator;
+namespace SimConsole;
 //file-scoped namespace == with ";"
 //blockck-scoped namespace == with "{}"
 internal class Program

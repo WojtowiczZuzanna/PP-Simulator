@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Simulator;
+namespace SimConsole;
 
 public class Animals
 {

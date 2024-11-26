@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulator;
+namespace SimConsole;
 
 
 public class Elf : Creature
@@ -15,7 +15,7 @@ public class Elf : Creature
     public int Agility
     {
         get => agility;
-        private set => agility = Validator.Limiter(value, 0, 10);
+        set => agility = Validator.Limiter(value, 0, 10);
     }
         /*{
             if (value < 0)
@@ -40,7 +40,7 @@ public class Elf : Creature
     }
 
     public Elf() : base() { }
-    public Elf(string name, int level, int agility) : base(name, level)
+    public Elf(string name, int level = 1, int agility = 1) : base(name, level)
     {
         Agility = agility;
     }

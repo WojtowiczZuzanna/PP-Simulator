@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulator.Maps;
+namespace SimConsole.Maps;
 
 public class SmallTorusMap : SmallMap
 {
@@ -24,9 +24,9 @@ public class SmallTorusMap : SmallMap
     {
         base.Move(creature, position, position2);
     }
-    public override void At(Point position)
+    public override List<Creature>? At(Point position)
     {
-        base.At(position);
+        return base.At(position);
     }
 
 

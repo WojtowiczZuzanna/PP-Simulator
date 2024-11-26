@@ -1,4 +1,4 @@
-﻿namespace Simulator.Maps;
+﻿namespace SimConsole.Maps;
 
 public abstract class SmallMap : Map
 {
@@ -40,13 +40,14 @@ public abstract class SmallMap : Map
         Remove(creature,position);
         Add(creature,position2);
     }
-    public override void At(Point position) 
+    public override List<Creature>? At(Point position) 
     {
-        new Point(position.X, position.Y); 
+        return _fields[position.X, position.Y];
+        //new Point(position.X, position.Y); 
     }
-    public override void At(int x, int y) 
-    { 
-        new Point(x,y);
+    public override List<Creature>? At(int x, int y) 
+    {
+        return At(new Point(x,y));
     }
 
 }
