@@ -1,5 +1,6 @@
 ﻿using SimConsole.Maps;
 using Simulator;
+using Simulator.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ internal class Program
         Console.WriteLine("Simulation\n");
 
         SmallSquareMap map = new(5);
-        List<Creature> creatures = new List<Creature> { new Orc("Gorbag"), new Elf("Elandor") };
+        List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor")];
         List<Point> points = new List<Point> { new(2, 2), new(3, 1) };
         string moves = "dlrludl";
 
@@ -30,7 +31,7 @@ internal class Program
         Console.WriteLine("\n");
 
         SmallSquareMap map1 = new(10);
-        List<Creature> creatures1 = new List<Creature> { new Orc("A"), new Elf("B") };
+        List<IMappable> creatures1 = [new Orc("A"), new Elf("B")];//{ new Orc("A"), new Elf("B") };
         List<Point> points1 = new List<Point> { new(6, 6), new(7, 5) };
         string moves1 = "lrlrdd";
 
@@ -42,3 +43,4 @@ internal class Program
         mapVisualizer1.Draw();
     }
 }
+//loss of words and my life energy

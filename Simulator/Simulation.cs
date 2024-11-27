@@ -1,4 +1,5 @@
 ﻿using SimConsole.Maps;
+using Simulator.Maps;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +17,21 @@ public class Simulation
     public Map Map { get; }
 
     /// <summary>
-    /// Creatures moving on the map.
+    /// IMappables moving on the map.
     /// </summary>
-    public List<Creature> Creatures { get; }
+    public List<IMappable> IMappables { get; }
 
     /// <summary>
-    /// Starting positions of creatures.
+    /// Starting positions of mappables.
     /// </summary>
     public List<Point> Positions { get; }
 
     /// <summary>
-    /// Cyclic list of creatures moves. 
+    /// Cyclic list of mappables moves. 
     /// Bad moves are ignored - use DirectionParser.
-    /// First move is for first creature, second for second and so on.
-    /// When all creatures make moves, 
-    /// next move is again for first creature and so on.
+    /// First move is for first mappable, second for second and so on.
+    /// When all mappables make moves, 
+    /// next move is again for first mappable and so on.
     /// </summary>
     public string Moves { get; }
 
@@ -40,11 +41,11 @@ public class Simulation
     public bool Finished => i >= Moves.Length;
 
     /// <summary>
-    /// Creature which will be moving current turn.
+    /// IMappable which will be moving current turn.
     /// </summary>
-    public Creature CurrentCreature 
+    public IMappable CurrentIMappable 
     { 
-        get => Creatures[i%Creatures.Count]; 
+        get => IMappables[i%IMappables.Count]; 
     }
 
     /// <summary>
@@ -59,34 +60,34 @@ public class Simulation
     /// <summary>
     /// Simulation constructor.
     /// Throw errors:
-    /// if creatures' list is empty,
-    /// if number of creatures differs from 
+    /// if mappables' list is empty,
+    /// if number of mappables differs from 
     /// number of starting positions.
     /// </summary>
-    public Simulation(Map map, List<Creature> creatures,
+    public Simulation(Map map, List<IMappable> mappables,
         List<Point> positions, string moves)
     {
-        if (creatures == null)
+        if (mappables == null)
         {
-            throw new ArgumentException("There is no creature");
+            throw new ArgumentException("There is no mappable");
         }
-        if (creatures.Count != positions.Count)
+        if (mappables.Count != positions.Count)
         {
-            throw new ArgumentException("Creatures' and positions' numbers are not the same");
+            throw new ArgumentException("IMappables' and positions' numbers are not the same");
         }
         Map = map;
-        Creatures = creatures;
+        IMappables = mappables;
         Positions = positions;
         Moves = moves;
 
-        for (int i = 0; i < Creatures.Count; i++)
+        for (int i = 0; i < IMappables.Count; i++)
         {
-            Creatures[i].InitMapAndPosition(Map, Positions[i]);
+            IMappables[i].InitMapAndPosition(Map, Positions[i]);
         }
     }
 
     /// <summary>
-    /// Makes one move of current creature in current direction.
+    /// Makes one move of current mappable in current direction.
     /// Throw error if simulation is finished.
     /// </summary>
     public void Turn() 
@@ -96,10 +97,10 @@ public class Simulation
             throw new InvalidOperationException("Finished");
         }
 
-        if (CurrentCreature != null)
+        if (CurrentIMappable != null)
         {
-            Creature creature = CurrentCreature;
-            Point position = CurrentCreature.Position;
+            IMappable mappable = CurrentIMappable;
+            Point position = CurrentIMappable.Position;
 
             Point newPosition = position;
 
@@ -122,39 +123,43 @@ public class Simulation
                     return;
             }
 
-            Map.Move(creature, position, newPosition);
-            Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
+            Map.Move(mappable, position, newPosition);
+            Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
         }
 
         i++;
     }
 }
 
+//zmienne prywane zwraca direction, lista ruchów,
+//lista srtirngów dynamicznych, trzy stringi ze statycznymi
+//górny wiersza, pierwszy wiersz danych...
+
 
             /*
             if (CurrentMoveName == "up")
             {
                 Point newPosition = Map.Next(position, Direction.Up);
-                Map.Move(creature, position, newPosition);
-                Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
+                Map.Move(mappable, position, newPosition);
+                Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
             }
             if (CurrentMoveName == "right")
             {
                 Point newPosition = Map.Next(position, Direction.Right);
-                Map.Move(creature, position, newPosition);
-                Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
+                Map.Move(mappable, position, newPosition);
+                Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
             }
             if (CurrentMoveName == "down")
             {
                 Point newPosition = Map.Next(position, Direction.Down);
-                Map.Move(creature, position, newPosition);
-                Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
+                Map.Move(mappable, position, newPosition);
+                Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
             }
             if (CurrentMoveName == "left")
             {
                 Point newPosition = Map.Next(position, Direction.Left);
-                Map.Move(creature, position, newPosition);
-                Console.WriteLine($"{creature}'s position: {position} -> {newPosition}");
+                Map.Move(mappable, position, newPosition);
+                Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
             }
             else
             {

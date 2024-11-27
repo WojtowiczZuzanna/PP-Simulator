@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Simulator.Maps;
 
 namespace SimConsole.Maps;
 
@@ -11,13 +12,13 @@ namespace SimConsole.Maps;
 /// </summary>
 public abstract class Map
 {
-    public abstract void Add(Creature creature, Point position);
+    public abstract void Add(IMappable mappable, Point position);
 
     //remove, move, at(x,y), at(p)
-    public abstract void Remove(Creature creature, Point position);
-    public abstract void Move(Creature creature, Point position, Point position2);
-    public abstract List<Creature>? At(Point position);
-    public abstract List<Creature>? At(int x, int y);
+    public abstract void Remove(IMappable mappable, Point position);
+    public abstract void Move(IMappable mappable, Point position, Point position2);
+    public abstract List<IMappable>? At(Point position);
+    public abstract List<IMappable>? At(int x, int y);
 
 
     private readonly Rectangle _map;

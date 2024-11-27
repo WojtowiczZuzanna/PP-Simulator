@@ -1,9 +1,11 @@
-﻿namespace SimConsole.Maps;
+﻿using Simulator.Maps;
+
+namespace SimConsole.Maps;
 
 public abstract class SmallMap : Map
 {
 
-    List<Creature>?[,] _fields;
+    List<IMappable>?[,] _fields;
 
     public SmallMap(int sizeX, int sizeY) :  base(sizeX, sizeY)
     {
@@ -16,36 +18,36 @@ public abstract class SmallMap : Map
             throw new ArgumentOutOfRangeException(nameof(sizeY), "Too high");
         }
 
-        _fields = new List<Creature>?[sizeX, sizeY];
+        _fields = new List<IMappable>?[sizeX, sizeY];
     }
     //add, remove, at...
     //turn to tura, nie wiem czy w tym pliku
 
-    public override void Add(Creature creature, Point position)
+    public override void Add(IMappable mappable, Point position)
     {
         if (!Exist(position))
         {
             throw new NotImplementedException();
         }
-        _fields[position.X, position.Y]??= new List<Creature>();
-        _fields[position.X, position.Y]!.Add(creature); //! - na pewno nie jest nullem
+        _fields[position.X, position.Y]??= new List<IMappable>();
+        _fields[position.X, position.Y]!.Add(mappable); //! - na pewno nie jest nullem
         
     }
-    public override void Remove(Creature creature, Point position) 
+    public override void Remove(IMappable mappable, Point position) 
     {
-        _fields[position.X, position.Y]!.Remove(creature);
+        _fields[position.X, position.Y]!.Remove(mappable);
     }
-    public override void Move(Creature creature, Point position, Point position2) 
+    public override void Move(IMappable mappable, Point position, Point position2) 
     { 
-        Remove(creature,position);
-        Add(creature,position2);
+        Remove(mappable,position);
+        Add(mappable,position2);
     }
-    public override List<Creature>? At(Point position) 
+    public override List<IMappable>? At(Point position) 
     {
         return _fields[position.X, position.Y];
         //new Point(position.X, position.Y); 
     }
-    public override List<Creature>? At(int x, int y) 
+    public override List<IMappable>? At(int x, int y) 
     {
         return At(new Point(x,y));
     }

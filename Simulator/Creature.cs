@@ -1,14 +1,15 @@
 ﻿using SimConsole.Maps;
+using Simulator.Maps;
 
 namespace SimConsole;
 
-public abstract class Creature
+public abstract class Creature : IMappable
 {
-    public Map? Map {  get; private set; }
+    public Map? Map { get; private set; }
     public Point Position { get; private set; }
 
-    public void InitMapAndPosition(Map map, Point position) 
-    { 
+    public void InitMapAndPosition(Map map, Point position)
+    {
         Map = map;
         Position = position;
     }
@@ -21,14 +22,14 @@ public abstract class Creature
         get => name;
         set => name = Validator.Shortener(value, 3, 25, '#');
     }
-  
+
 
     private int level;
     public int Level
     {
         get => level;
         set => level = Validator.Limiter(value, 1, 10);
- 
+
     }
     //public Creature() { }
 
@@ -62,7 +63,10 @@ public abstract class Creature
     }
 
 
-    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
+    public void Go(Direction direction) 
+    {
+        direction.ToString().ToLower()
+    }
     // ma użyc regul mapy
     //next, czy pozycja jest rowna poprzedniej, zmiana pozycji, aktualizacja przy pomocy move w mapie
 
