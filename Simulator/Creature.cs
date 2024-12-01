@@ -31,15 +31,13 @@ public abstract class Creature : IMappable
         set => level = Validator.Limiter(value, 1, 10);
 
     }
-    //public Creature() { }
-
-    //public Creature(string name) { Name = name; }
-    //public Creature(int level) { Level = level; }
     public Creature(string name = "Unknown", int level = 1)
     {
         Name = name;
         Level = level;
     }
+    public Creature() { }
+
     public virtual string Info => $"{Name} {Level}";
 
     public virtual string Greeting()//virtual void SayHi()
@@ -65,8 +63,13 @@ public abstract class Creature : IMappable
 
     public void Go(Direction direction) 
     {
-        direction.ToString().ToLower()
+        direction.ToString().ToLower();
+        var position2 = Map.Next(Position, direction);
+        Map.Move(this, Position, position2);
+        Position = position2;
     }
+
+
     // ma użyc regul mapy
     //next, czy pozycja jest rowna poprzedniej, zmiana pozycji, aktualizacja przy pomocy move w mapie
 
@@ -91,6 +94,9 @@ public abstract class Creature : IMappable
         get => power;
         set { power = value; }
     }
+
+    public abstract Point position { get; }
+
 
     public override string ToString()
     {

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+﻿using SimConsole.Maps;
+using Simulator.Maps;
 
 namespace SimConsole;
 
-public class Animals
+public class Animals : IMappable
 {
     private string description;// = string.Empty;
     public required string Description
@@ -48,6 +44,17 @@ public class Animals
 
     public virtual string Info => $"{Description} <{Size}>";
 
+    public Point position => throw new NotImplementedException();
+
+    public virtual void Go(Direction direction)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void InitMapAndPosition(Map map, Point position)
+    {
+        throw new NotImplementedException();
+    }
 
     public override string ToString()
     {
@@ -55,3 +62,4 @@ public class Animals
     } 
 
 }
+//gdzieś będzie virtual, w Go chyba -> potem ptaki override

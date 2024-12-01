@@ -16,15 +16,21 @@ public class MapVisualizer
     {
         Console.OutputEncoding = Encoding.UTF8;
 
-
+        
         Console.Write(Box.TopLeft);
         for (int x = 0; x < _map.SizeX - 1; x++)
-            Console.Write(Box.Horizontal + (x < _map.SizeX - 1 ? Box.TopMid.ToString() : Box.TopRight.ToString()));
-        Console.WriteLine();
-
-        for (int y = _map.SizeY - 1; y >= 0; y--)
         {
-            Console.Write(Box.Vertical);
+            Console.Write(Box.Horizontal);
+            Console.Write(Box.TopMid);
+        }
+        Console.Write(Box.Horizontal);
+        Console.WriteLine(Box.TopRight);
+
+        
+        for (int y = 0; y < _map.SizeY; y++)
+        {
+            
+            Console.Write(Box.Vertical); 
             for (int x = 0; x < _map.SizeX; x++)
             {
                 var creatures = _map.At(x, y);
@@ -41,22 +47,33 @@ public class MapVisualizer
                 {
                     Console.Write(" ");
                 }
-                Console.Write($"{Box.Vertical}");
+                Console.Write(Box.Vertical); 
             }
             Console.WriteLine();
 
-            if (y>0)
+            
+            if (y < _map.SizeY - 1)
             {
                 Console.Write(Box.MidLeft);
                 for (int x = 0; x < _map.SizeX - 1; x++)
-                    Console.Write(Box.Horizontal + (x < _map.SizeX - 1 ? Box.Cross.ToString() : Box.MidRight.ToString()));
-                Console.WriteLine();
+                {
+                    Console.Write(Box.Horizontal);
+                    Console.Write(Box.Cross);
+                }
+                Console.Write(Box.Horizontal);
+                Console.WriteLine(Box.MidRight);
             }
         }
-            Console.Write(Box.BottomLeft);
-            for (int x = 0; x < _map.SizeX - 1; x++)
-                Console.Write(Box.Horizontal + (x < _map.SizeX - 1 ? Box.BottomMid.ToString() : Box.BottomRight.ToString()));
-            Console.WriteLine();
+
+        
+        Console.Write(Box.BottomLeft);
+        for (int x = 0; x < _map.SizeX - 1; x++)
+        {
+            Console.Write(Box.Horizontal);
+            Console.Write(Box.BottomMid);
+        }
+        Console.Write(Box.Horizontal);
+        Console.WriteLine(Box.BottomRight);
     }
 }
 

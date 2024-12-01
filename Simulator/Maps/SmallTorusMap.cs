@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Simulator.Maps;
 
 namespace SimConsole.Maps;
 
@@ -12,19 +6,19 @@ public class SmallTorusMap : SmallMap
 {
     public SmallTorusMap(int sizeX, int sizeY) : base(sizeX, sizeY) { }
     
-    public override void Add(Creature creature, Point position)
+    public override void Add(IMappable mappable, Point position)
     {
-        base.Add(creature, position);
+        base.Add(mappable, position);
     }
-    public override void Remove(Creature creature, Point position)
+    public override void Remove(IMappable mappable, Point position)
     {
-        base.Remove(creature, position);
+        base.Remove(mappable, position);
     }
-    public override void Move(Creature creature, Point position, Point position2)
+    public override void Move(IMappable mappable, Point position, Point position2)
     {
-        base.Move(creature, position, position2);
+        base.Move(mappable, position, position2);
     }
-    public override List<Creature>? At(Point position)
+    public override List<IMappable>? At(Point position)
     {
         return base.At(position);
     }

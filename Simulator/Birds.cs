@@ -25,4 +25,6 @@ internal class Birds : Animals
         }
     }*/
     public override string Info => $"{Description} (fly{(CanFLy ? "+" : "-")}) <{Size}>";
+    public override void Go(Direction direction) { }
+
 }

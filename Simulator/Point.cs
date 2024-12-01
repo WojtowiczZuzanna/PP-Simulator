@@ -17,8 +17,8 @@ public readonly struct Point
         // write code
         try
         {
-            if (direction == Direction.Up) { return new Point(X, Y + 1); }
-            if (direction == Direction.Down) { return new Point(X, Y - 1); }
+            if (direction == Direction.Up) { return new Point(X, Y - 1); }    //bo mapa rysuje sie na odwrót
+            if (direction == Direction.Down) { return new Point(X, Y + 1); }  //oś x jest normalnie, ale oś y jest na minusach
             if (direction == Direction.Left) { return new Point(X - 1, Y); }
             if (direction == Direction.Right) { return new Point(X + 1, Y); }
 

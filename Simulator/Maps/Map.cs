@@ -68,4 +68,5 @@ public abstract class Map
     /// <param name="d">Direction.</param>
     /// <returns>Next point.</returns>
     public abstract Point NextDiagonal(Point p, Direction d);
+    //internal abstract Point Next(Point position, List<Direction> currentMove);
 }

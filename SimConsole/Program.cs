@@ -1,11 +1,7 @@
 ﻿using SimConsole.Maps;
 using Simulator;
 using Simulator.Maps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace SimConsole;
 
@@ -13,7 +9,8 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Simulation\n");
+        Console.OutputEncoding = Encoding.UTF8;
+        Console.WriteLine("Simulation");
 
         SmallSquareMap map = new(5);
         List<IMappable> creatures = [new Orc("Gorbag"), new Elf("Elandor")];
@@ -24,14 +21,19 @@ internal class Program
         MapVisualizer mapVisualizer = new(map);
 
         mapVisualizer.Draw();
-        simulation.Turn();
+
+        while (!simulation.Finished)
+        {
+            simulation.Turn(); // Process each move in the simulation
+        }
         mapVisualizer.Draw();
+        Console.WriteLine("Finished\n");
 
 
-        Console.WriteLine("\n");
+        Console.WriteLine("Simulation1");
 
         SmallSquareMap map1 = new(10);
-        List<IMappable> creatures1 = [new Orc("A"), new Elf("B")];//{ new Orc("A"), new Elf("B") };
+        List<IMappable> creatures1 = [new Orc("A"), new Elf("B")];
         List<Point> points1 = new List<Point> { new(6, 6), new(7, 5) };
         string moves1 = "lrlrdd";
 
@@ -39,8 +41,14 @@ internal class Program
         MapVisualizer mapVisualizer1 = new(map1);
 
         mapVisualizer1.Draw();
-        simulation1.Turn();
+
+        while (!simulation1.Finished)
+        {
+            simulation1.Turn(); // Process each move in the simulation
+        }
         mapVisualizer1.Draw();
+        Console.WriteLine("Finished\n");
     }
 }
+
 //loss of words and my life energy

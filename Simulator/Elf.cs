@@ -17,17 +17,17 @@ public class Elf : Creature
         get => agility;
         set => agility = Validator.Limiter(value, 0, 10);
     }
-        /*{
-            if (value < 0)
-            {
-                value = 0;
-            }
-            else if (value > 10)
-            {
-                value = 10;
-            }
+    /*{
+        if (value < 0)
+        {
+            value = 0;
         }
-    }*/
+        else if (value > 10)
+        {
+            value = 10;
+        }
+    }
+}*/
     public void Sing()
     {
         singCount += 1;
@@ -48,6 +48,8 @@ public class Elf : Creature
     public override string Greeting() => $"Hi, I'm {Name}, my level is {Level}, my agility is {Agility}.";
 
     public override int Power => 8 * Level + 2 * Agility;
-    
+
     public override string Info => $"{Name} {Level} {Agility}";
+
+    public override Point position => Position;
 }

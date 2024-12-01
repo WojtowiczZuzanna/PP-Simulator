@@ -1,10 +1,5 @@
 ﻿using SimConsole.Maps;
 using Simulator.Maps;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimConsole;
 
@@ -38,14 +33,14 @@ public class Simulation
     /// <summary>
     /// Has all moves been done?
     /// </summary>
-    public bool Finished => i >= Moves.Length;
+    public bool Finished = false;
 
     /// <summary>
     /// IMappable which will be moving current turn.
     /// </summary>
-    public IMappable CurrentIMappable 
-    { 
-        get => IMappables[i%IMappables.Count]; 
+    public IMappable CurrentIMappable
+    {
+        get => IMappables[i % IMappables.Count];
     }
 
     /// <summary>
@@ -53,8 +48,7 @@ public class Simulation
     /// </summary>
     public string CurrentMoveName
     {
-        get => Moves[i%Moves.Length].ToString();
-        
+        get => Moves[i].ToString();
     }
 
     /// <summary>
@@ -67,7 +61,7 @@ public class Simulation
     public Simulation(Map map, List<IMappable> mappables,
         List<Point> positions, string moves)
     {
-        if (mappables == null)
+        if (mappables.Count == 0)
         {
             throw new ArgumentException("There is no mappable");
         }
@@ -78,96 +72,53 @@ public class Simulation
         Map = map;
         IMappables = mappables;
         Positions = positions;
-        Moves = moves;
 
         for (int i = 0; i < IMappables.Count; i++)
         {
             IMappables[i].InitMapAndPosition(Map, Positions[i]);
+            Map.Add(IMappables[i], Positions[i]);
         }
+        Moves = moves;
     }
 
     /// <summary>
     /// Makes one move of current mappable in current direction.
     /// Throw error if simulation is finished.
     /// </summary>
-    public void Turn() 
+    public void Turn()
     {
         if (Finished)
         {
             throw new InvalidOperationException("Finished");
         }
 
-        if (CurrentIMappable != null)
+        while (true)
         {
             IMappable mappable = CurrentIMappable;
-            Point position = CurrentIMappable.Position;
+            string move = CurrentMoveName;
 
-            Point newPosition = position;
+            var currentMove = DirectionParser.Parse(move);
 
-            switch (CurrentMoveName)
+            if (currentMove.Any())
             {
-                case "up":
-                    newPosition = Map.Next(position, Direction.Up);
-                    break;
-                case "right":
-                    newPosition = Map.Next(position, Direction.Right);
-                    break;
-                case "down":
-                    newPosition = Map.Next(position, Direction.Down);
-                    break;
-                case "left":
-                    newPosition = Map.Next(position, Direction.Left);
-                    break;
-                default:
-                    Console.WriteLine("Smth's wrong");
-                    return;
-            }
-
-            Map.Move(mappable, position, newPosition);
-            Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
-        }
-
-        i++;
-    }
-}
-
-//zmienne prywane zwraca direction, lista ruchów,
-//lista srtirngów dynamicznych, trzy stringi ze statycznymi
-//górny wiersza, pierwszy wiersz danych...
-
-
-            /*
-            if (CurrentMoveName == "up")
-            {
-                Point newPosition = Map.Next(position, Direction.Up);
-                Map.Move(mappable, position, newPosition);
-                Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
-            }
-            if (CurrentMoveName == "right")
-            {
-                Point newPosition = Map.Next(position, Direction.Right);
-                Map.Move(mappable, position, newPosition);
-                Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
-            }
-            if (CurrentMoveName == "down")
-            {
-                Point newPosition = Map.Next(position, Direction.Down);
-                Map.Move(mappable, position, newPosition);
-                Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
-            }
-            if (CurrentMoveName == "left")
-            {
-                Point newPosition = Map.Next(position, Direction.Left);
-                Map.Move(mappable, position, newPosition);
-                Console.WriteLine($"{mappable}'s position: {position} -> {newPosition}");
+                mappable.Go(currentMove[0]); 
+                i++; 
+                break;
             }
             else
             {
-                Console.WriteLine("Smth's wrong");
+                i++;
+                if (i >= Moves.Length)
+                {
+                    Finished = true;
+                    return; 
+                }
             }
-            i++;
         }
-        
 
-    }*
-}*/
+        if (i >= Moves.Length)
+        {
+            Finished = true;
+        }
+    }
+}
