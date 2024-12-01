@@ -5,8 +5,25 @@ namespace SimConsole;
 
 public class Animals : IMappable
 {
+    public virtual char Symbol => 'A';
+    public Map? Map { get; private set; }
+    public Point Position { get; private set; }
+    public void InitMapAndPosition(Map map, Point position)
+    {
+        Map = map;
+        Position = position;
+    }
+
+    public Animals(string description = "###", int size = 3)
+    {
+        Description = description;
+        Size = (uint)size;
+    }
+    public Animals() { }
+        
+
     private string description;// = string.Empty;
-    public required string Description
+    public string Description
     {
         get => description;
         init
@@ -48,12 +65,10 @@ public class Animals : IMappable
 
     public virtual void Go(Direction direction)
     {
-        throw new NotImplementedException();
-    }
-
-    public void InitMapAndPosition(Map map, Point position)
-    {
-        throw new NotImplementedException();
+        direction.ToString().ToLower();
+        var position2 = Map.Next(Position, direction);
+        Map.Move(this, Position, position2);
+        Position = position2;
     }
 
     public override string ToString()

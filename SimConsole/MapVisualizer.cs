@@ -1,11 +1,15 @@
 ﻿using SimConsole.Maps;
 using SimConsole;
 using System.Text;
+using System.Linq.Expressions;
 
 namespace Simulator;
 
 public class MapVisualizer
 {
+    char Symbol { get; }
+    bool CanFly { get; }
+    
     private readonly Map _map;
     public MapVisualizer(Map map)
     {
@@ -34,14 +38,14 @@ public class MapVisualizer
             for (int x = 0; x < _map.SizeX; x++)
             {
                 var creatures = _map.At(x, y);
-                if (creatures != null && creatures.Count > 1)
-                {
+                if (creatures != null && creatures.Distinct().Count() > 1)
+                { 
                     Console.Write("X");
                 }
                 else if (creatures != null && creatures.Count == 1)
                 {
                     var creature = creatures.First();
-                    Console.Write(creature is Orc ? "O" : "E");
+                    Console.Write(creature.Symbol);
                 }
                 else
                 {

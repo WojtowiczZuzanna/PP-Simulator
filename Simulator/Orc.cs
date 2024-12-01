@@ -9,6 +9,8 @@ namespace SimConsole;
 
 public class Orc : Creature
 {
+    public override char Symbol => 'O';
+
     int rageCount = 0;
     private int rage;
     public int Rage

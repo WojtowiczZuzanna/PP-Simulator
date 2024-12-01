@@ -97,6 +97,9 @@ public abstract class Creature : IMappable
 
     public abstract Point position { get; }
 
+    //public char Symbol => throw new NotImplementedException();
+
+    public abstract char Symbol { get; }
 
     public override string ToString()
     {

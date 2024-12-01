@@ -9,6 +9,36 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        //Lab8a();
+        Lab8b();
+
+        static void Lab8b()
+        {
+
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.WriteLine("\n");
+
+            SmallTorusMap map = new(8, 6);
+            List<IMappable> creatures = [new Elf(), new Orc(), new Animals("Rabbits"), new Birds("Eagles", 4, true), new Birds("Ostriches", 10, false)];
+            List<Point> points = new List<Point> { new(2, 2), new(3, 1), new(4, 4), new(1, 1), new(0, 4)};
+            string moves = "rdlruldrllrdrru";
+
+            Simulation simulation = new(map, creatures, points, moves);
+            MapVisualizer mapVisualizer = new(map);
+
+            mapVisualizer.Draw();
+
+            while (!simulation.Finished)
+            {
+                simulation.Turn(); 
+            }
+            mapVisualizer.Draw();
+            Console.WriteLine("Finished\n");
+        }
+
+
+        static void Lab8a()
+        { 
         Console.OutputEncoding = Encoding.UTF8;
         Console.WriteLine("Simulation");
 
@@ -44,11 +74,10 @@ internal class Program
 
         while (!simulation1.Finished)
         {
-            simulation1.Turn(); // Process each move in the simulation
+            simulation1.Turn();
         }
         mapVisualizer1.Draw();
         Console.WriteLine("Finished\n");
-    }
+    } }
 }
 
-//loss of words and my life energy

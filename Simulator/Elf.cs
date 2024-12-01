@@ -10,6 +10,8 @@ namespace SimConsole;
 
 public class Elf : Creature
 {
+    public override char Symbol => 'E';
+
     int singCount = 0;
     private int agility;
     public int Agility
