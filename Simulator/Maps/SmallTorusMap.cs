@@ -5,7 +5,7 @@ namespace SimConsole.Maps;
 public class SmallTorusMap : SmallMap
 {
     public SmallTorusMap(int sizeX, int sizeY) : base(sizeX, sizeY) { }
-    
+
     public override void Add(IMappable mappable, Point position)
     {
         base.Add(mappable, position);

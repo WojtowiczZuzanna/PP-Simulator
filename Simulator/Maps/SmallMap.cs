@@ -20,8 +20,6 @@ public abstract class SmallMap : Map
 
         _fields = new List<IMappable>?[sizeX, sizeY];
     }
-    //add, remove, at...
-    //turn to tura, nie wiem czy w tym pliku
 
     public override void Add(IMappable mappable, Point position)
     {

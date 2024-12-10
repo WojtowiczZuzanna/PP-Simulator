@@ -2,7 +2,7 @@
 
 namespace SimConsole.Maps;
 
-public class SmallSquareMap : SmallMap
+public abstract class SmallSquareMap : SmallMap
 {
     public SmallSquareMap(int size) : base(size, size) { }
     
@@ -54,4 +54,5 @@ public class SmallSquareMap : SmallMap
         }
 
     }
+
 }

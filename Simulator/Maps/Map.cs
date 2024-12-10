@@ -13,8 +13,6 @@ namespace SimConsole.Maps;
 public abstract class Map
 {
     public abstract void Add(IMappable mappable, Point position);
-
-    //remove, move, at(x,y), at(p)
     public abstract void Remove(IMappable mappable, Point position);
     public abstract void Move(IMappable mappable, Point position, Point position2);
     public abstract List<IMappable>? At(Point position);
@@ -69,4 +67,7 @@ public abstract class Map
     /// <returns>Next point.</returns>
     public abstract Point NextDiagonal(Point p, Direction d);
     //internal abstract Point Next(Point position, List<Direction> currentMove);
+
+    //public abstract Point BounceNext(Point p, Direction d);
+    //public abstract Point BounceNextDiagonal(Point p, Direction d);
 }

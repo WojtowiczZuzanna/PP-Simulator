@@ -7,7 +7,7 @@ public class Animals : IMappable
 {
     public virtual char Symbol => 'A';
     public Map? Map { get; private set; }
-    public Point Position { get; private set; }
+    public Point Position { get; set; }
     public void InitMapAndPosition(Map map, Point position)
     {
         Map = map;
@@ -61,7 +61,7 @@ public class Animals : IMappable
 
     public virtual string Info => $"{Description} <{Size}>";
 
-    public Point position => throw new NotImplementedException();
+    public virtual Point position => Position;//throw new NotImplementedException();
 
     public virtual void Go(Direction direction)
     {
@@ -77,4 +77,3 @@ public class Animals : IMappable
     } 
 
 }
-//gdzieś będzie virtual, w Go chyba -> potem ptaki override

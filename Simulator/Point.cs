@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,41 +15,58 @@ public readonly struct Point
 
     public Point Next(Direction direction)
     {
-        // write code
-        try
-        {
-            if (direction == Direction.Up) { return new Point(X, Y - 1); }    //bo mapa rysuje sie na odwrót
-            if (direction == Direction.Down) { return new Point(X, Y + 1); }  //oś x jest normalnie, ale oś y jest na minusach
-            if (direction == Direction.Left) { return new Point(X - 1, Y); }
-            if (direction == Direction.Right) { return new Point(X + 1, Y); }
+        if (direction == Direction.Up) { return new Point(X, Y - 1); }    //bo mapa rysuje sie na odwrót
+        if (direction == Direction.Down) { return new Point(X, Y + 1); }  //oś x jest normalnie, ale oś y jest na minusach
+        if (direction == Direction.Left) { return new Point(X - 1, Y); }
+        if (direction == Direction.Right) { return new Point(X + 1, Y); }
 
-            throw new Exception("Invalid direction");
-        }
-        catch
-        {
-            return default;
-        }
+        return this;
     }
-        
 
-    // rotate given direction 45 degrees clockwise
     public Point NextDiagonal(Direction direction)
     {
-        // write code
-        try
-        {
-            if (direction == Direction.Up) { return new Point(X + 1, Y + 1); }
-            if (direction == Direction.Down) { return new Point(X - 1, Y - 1); }
-            if (direction == Direction.Left) { return new Point(X - 1, Y + 1); }
-            if (direction == Direction.Right) { return new Point(X + 1, Y - 1); }
-        
-          throw new Exception("Invalid direction");
-        }
-        catch
-        {
-            return default;
-        }
-    }
+    
+        if (direction == Direction.Up) { return new Point(X + 1, Y + 1); }
+        if (direction == Direction.Down) { return new Point(X - 1, Y - 1); }
+        if (direction == Direction.Left) { return new Point(X - 1, Y + 1); }
+        if (direction == Direction.Right) { return new Point(X + 1, Y - 1); }
 
+
+        return this;
+    }
+    //public Point BounceNext(Direction direction)
+    //{
+    //    try
+    //    {
+
+    //        if (direction == Direction.Up) { return new Point(X, Y + 1); }    //bo mapa rysuje sie na odwrót
+    //        if (direction == Direction.Down) { return new Point(X, Y - 1); }  //oś x jest normalnie, ale oś y jest na minusach
+    //        if (direction == Direction.Right) { return new Point(X - 1, Y); }
+    //        if (direction == Direction.Left) { return new Point(X + 1, Y); }
+
+    //        throw new Exception("Invalid direction");
+    //    }
+    //    catch
+    //    {
+    //        return default;
+    //    }
+    //}
+
+    //public Point BounceNextDiagonal(Direction direction)
+    //{
+    //    try
+    //    {
+    //        if (direction == Direction.Left) { return new Point(X + 1, Y + 1); }
+    //        if (direction == Direction.Right) { return new Point(X - 1, Y - 1); }
+    //        if (direction == Direction.Up) { return new Point(X - 1, Y + 1); }
+    //        if (direction == Direction.Down) { return new Point(X + 1, Y - 1); }
+
+    //        throw new Exception("Invalid direction");
+    //    }
+    //    catch
+    //    {
+    //        return default;
+    //    }
+    //}
 }
     

@@ -15,7 +15,6 @@ public abstract class Creature : IMappable
     }
 
 
-
     private string name = "Unknown";
     public string Name
     {
@@ -70,24 +69,6 @@ public abstract class Creature : IMappable
     }
 
 
-    // ma użyc regul mapy
-    //next, czy pozycja jest rowna poprzedniej, zmiana pozycji, aktualizacja przy pomocy move w mapie
-
-    //out
-    //public string[] Go(Direction[] directions)
-    //{
-    //    var result = new string[directions.Length];
-    //    for (int i = 0; i < directions.Length; i++)
-    //    {
-    //        result[i] = Go(directions[i]);
-    //    }
-    //    return result;
-    //}
-
-    //out
-    //parser =>
-    //public string[] Go(string input) => Go(DirectionParser.Parse(input));
-
     private int power;
     public virtual int Power
     {
@@ -96,8 +77,6 @@ public abstract class Creature : IMappable
     }
 
     public abstract Point position { get; }
-
-    //public char Symbol => throw new NotImplementedException();
 
     public abstract char Symbol { get; }
 

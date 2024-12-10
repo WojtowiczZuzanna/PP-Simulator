@@ -72,7 +72,8 @@ public class Simulation
         Map = map;
         IMappables = mappables;
         Positions = positions;
-
+        positions.ForEach(x => Console.Write(x + ","));
+        Console.WriteLine("\n");
         for (int i = 0; i < IMappables.Count; i++)
         {
             IMappables[i].InitMapAndPosition(Map, Positions[i]);

@@ -11,7 +11,7 @@ namespace SimConsole;
 public class Birds : Animals
 {
     public Birds() : base() { }
-    public Birds(string description, int size, bool canFly) 
+    public Birds(string description, int size, bool canFly)
     {
         Description = description;
         Size = (uint)size;
@@ -19,25 +19,36 @@ public class Birds : Animals
     }
     public override char Symbol => (CanFly == false) ? 'b' : 'B';
     public bool CanFly { get; set; } = true;
+    public override Point position => Position;
 
     public override string Info => $"{Description} (fly{(CanFly ? "+" : "-")}) <{Size}>";
     public override void Go(Direction direction) 
     {
+
         if (CanFly == true)
         {
             direction.ToString().ToLower();
             var position2 = Map.Next(Position, direction);
-            var positionf = Map.Next(Position, direction);
-            Map.Move(this, Position, positionf);
-            
+            Map.Move(this, Position, position2);
+            Position = position2;
+
         }
         else if (CanFly == false)
         {
             direction.ToString().ToLower();
-            var positionf = Map.NextDiagonal(Position, direction);
-            Map.Move(this, Position, positionf);
-            
+            var position2 = Map.NextDiagonal(Position, direction);
+            Map.Move(this, Position, position2);
+            Position = position2;
+
         }
+
+        //var position2 = CanFly
+        //? Map.Next(Position, direction)
+        //: Map.NextDiagonal(Position, direction);
+
+        //Map.Move(this, Position, position2);
+        //Position = position2;
+
     }
 
 }
