@@ -35,6 +35,8 @@ public class Simulation
     /// </summary>
     public bool Finished = false;
 
+
+    public SimulationHistory simulationHistory;
     /// <summary>
     /// IMappable which will be moving current turn.
     /// </summary>
@@ -58,6 +60,7 @@ public class Simulation
     /// if number of mappables differs from 
     /// number of starting positions.
     /// </summary>
+    
     public Simulation(Map map, List<IMappable> mappables,
         List<Point> positions, string moves)
     {
@@ -72,14 +75,15 @@ public class Simulation
         Map = map;
         IMappables = mappables;
         Positions = positions;
-        positions.ForEach(x => Console.Write(x + ","));
-        Console.WriteLine("\n");
+        //positions.ForEach(x => Console.Write(x + ","));
+        //Console.WriteLine("\n");
         for (int i = 0; i < IMappables.Count; i++)
         {
             IMappables[i].InitMapAndPosition(Map, Positions[i]);
             Map.Add(IMappables[i], Positions[i]);
         }
         Moves = moves;
+        simulationHistory = new SimulationHistory();
     }
 
     /// <summary>
@@ -121,5 +125,6 @@ public class Simulation
         {
             Finished = true;
         }
+        simulationHistory.RecordState(IMappables, Moves, i);
     }
 }
