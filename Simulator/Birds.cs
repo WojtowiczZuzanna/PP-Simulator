@@ -11,9 +11,9 @@ namespace SimConsole;
 public class Birds : Animals
 {
     public Birds() : base() { }
-    public Birds(string description, int size, bool canFly)
+    public Birds(string name, int size, bool canFly)
     {
-        Description = description;
+        Name = name;
         Size = (uint)size;
         CanFly = canFly;
     }
@@ -21,7 +21,7 @@ public class Birds : Animals
     public bool CanFly { get; set; } = true;
     public override Point position => Position;
 
-    public override string Info => $"{Description} (fly{(CanFly ? "+" : "-")}) <{Size}>";
+    public override string Info => $"{Name} (fly{(CanFly ? "+" : "-")}) <{Size}>";
     public override void Go(Direction direction) 
     {
 

@@ -1,5 +1,6 @@
 ﻿using SimConsole.Maps;
 using Simulator.Maps;
+using System.ComponentModel;
 
 namespace SimConsole;
 
@@ -14,44 +15,44 @@ public class Animals : IMappable
         Position = position;
     }
 
-    public Animals(string description = "###", int size = 3)
+    public Animals(string name = "###", int size = 3)
     {
-        Description = description;
+        Name = name;
         Size = (uint)size;
     }
     public Animals() { }
         
 
-    private string description;// = string.Empty;
-    public string Description
+    private string name;// = string.Empty;
+    public string Name
     {
-        get => description;
+        get => name;
         init
         {
             if (string.IsNullOrEmpty(value))
             {
-                description = "###";
+                name = "###";
             }
             else
             {
 
-                description = value.Trim();
+                name = value.Trim();
 
-                if (description.Length > 15)
+                if (name.Length > 15)
                 {
-                    description = description.Substring(0, 15);
+                    name = name.Substring(0, 15);
                 }
 
-                description = value.Trim();
+                name = value.Trim();
 
-                if (description.Length < 3)
+                if (name.Length < 3)
                 {
-                    description = description.PadRight(3, '#');
+                    name = name.PadRight(3, '#');
                 }
 
-                if (char.IsLower(description[0]))
+                if (char.IsLower(name[0]))
                 {
-                    description = char.ToUpper(description[0]) + description.Substring(1);
+                    name = char.ToUpper(name[0]) + name.Substring(1);
                 }
             }
         }
@@ -59,7 +60,7 @@ public class Animals : IMappable
 
     public uint Size { get; set; } = 3;
 
-    public virtual string Info => $"{Description} <{Size}>";
+    public virtual string Info => $"{Name} <{Size}>";
 
     public virtual Point position => Position;//throw new NotImplementedException();
 

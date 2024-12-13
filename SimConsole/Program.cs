@@ -54,9 +54,9 @@ namespace SimConsole
                 var state = history.GetStateAtTurn(turn-1);
                 Console.WriteLine($"Simulation in turn {turn}:");
 
-                foreach (var creature in state.Creatures)
+                foreach (var (className, name, position, move) in state.Creatures)
                 {
-                    Console.WriteLine($"Object: {creature.GetType().Name}, Position: {creature.position}");
+                    Console.WriteLine($"{className}: {name}, Position: {position} => {move}");
                 }
             }
             catch (Exception ex)

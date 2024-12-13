@@ -8,8 +8,8 @@ public interface IMappable
 {
     public abstract char Symbol { get; }
     public string ToString();
+    public string Name { get; }
     public Point position { get; }
-
     void Go(Direction direction);
     void InitMapAndPosition(Map map, Point position);
 

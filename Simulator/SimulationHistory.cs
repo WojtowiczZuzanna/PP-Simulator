@@ -31,14 +31,21 @@ public class SimulationHistory
 
 public class SimulationState
 {
-    public List<IMappable> Creatures { get; }
-    public string Moves { get; }
+    public List<(string ClassName, string Name, Point Position, string Move)> Creatures { get; }
+    //public string Moves { get; }
     public int Turn { get; }
 
     public SimulationState(List<IMappable> creatures, string moves, int turn)
     {
-        Creatures = new List<IMappable>(creatures); 
-        Moves = moves;
+        //Creatures = creatures.Select(c => (c.GetType().Name, c.position)).ToList();
+        Creatures = creatures.Select((c, index) => (
+            c.GetType().Name,
+            c.Name,
+            c.position,
+            moves[index % moves.Length].ToString()
+        )).ToList();
+
+        //Moves = moves;
         Turn = turn;
     }
 
