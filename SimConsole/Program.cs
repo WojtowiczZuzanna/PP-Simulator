@@ -23,26 +23,47 @@ namespace SimConsole
             List<Point> points = new List<Point> { new(0, 2), new(0, 1), new(7, 5), new(7, 3), new(0, 5) };
             string moves = "lldrlruduuullrdrlddr";
             Simulation simulation = new(map, creatures, points, moves);
-            MapVisualizer mapVisualizer = new(map);
 
-            var simulationHistory = new SimulationHistory(); 
+            var simulationHistory = new SimulationHistory();
 
-            mapVisualizer.Draw();
+
+            //MapVisualizer mapVisualizer = new(map);
+            //mapVisualier.Draw();
+            //while (!simulation.Finished)
+            //{
+            //    simulation.Turn();
+            //}
+            //mapVisualier.Draw();
+
+            //var logVisualizer = new LogVisualizer(simulation.SimulationHistory);
+            //logVisualizer.Draw(1);
+            //while (!simulation.Finished)
+            //{
+            //    simulation.Turn();
+            //}
+            //logVisualizer.Draw(8);
+            //logVisualizer.Draw(10);
+
+
+            var logVisualizer = new LogVisualizer(map);
+
+        
+            logVisualizer.Draw();
             while (!simulation.Finished)
             {
-                simulation.Turn(); 
+                simulation.Turn();
             }
+            logVisualizer.Draw();
 
-            mapVisualizer.Draw();
             Console.WriteLine("Finished\n");
 
-            DisplaySimulationState(simulation.simulationHistory, 5);
+            DisplaySimulationState(simulation.SimulationHistory, 5);
             Console.WriteLine("\n");
-            DisplaySimulationState(simulation.simulationHistory, 10);
+            DisplaySimulationState(simulation.SimulationHistory, 10);
             Console.WriteLine("\n");
-            DisplaySimulationState(simulation.simulationHistory, 15);
+            DisplaySimulationState(simulation.SimulationHistory, 15);
             Console.WriteLine("\n");
-            DisplaySimulationState(simulation.simulationHistory, 20);
+            DisplaySimulationState(simulation.SimulationHistory, 20);
             Console.WriteLine("\n");
 
         }

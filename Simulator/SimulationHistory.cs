@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Simulator;
 using Simulator.Maps;
 
@@ -14,9 +15,9 @@ public class SimulationHistory
         history = new List<SimulationState>();
     }
 
-    public void RecordState(List<IMappable> creatures, string moves, int turn)
+    public void RecordState(List<IMappable> creatures, string currentMoveName, int turn)
     {
-        var state = new SimulationState(creatures, moves, turn);
+        var state = new SimulationState(creatures, currentMoveName, turn);
         history.Add(state);
     }
 
@@ -31,21 +32,22 @@ public class SimulationHistory
 
 public class SimulationState
 {
-    public List<(string ClassName, string Name, Point Position, string Move)> Creatures { get; }
-    //public string Moves { get; }
+    public List<(string ClassName, string Name, Point Position, char Move)> Creatures { get; }
+    public string Moves { get; }
     public int Turn { get; }
 
     public SimulationState(List<IMappable> creatures, string moves, int turn)
     {
-        //Creatures = creatures.Select(c => (c.GetType().Name, c.position)).ToList();
+
         Creatures = creatures.Select((c, index) => (
             c.GetType().Name,
             c.Name,
             c.position,
-            moves[index % moves.Length].ToString()
+            moves[index % moves.Length]
+
         )).ToList();
 
-        //Moves = moves;
+        Moves = moves;
         Turn = turn;
     }
 
