@@ -1,0 +1,160 @@
+﻿@page
+@model SimWeb.Pages.SimulationModel
+@{
+    ViewData["Title"] = "Simulation";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>This site provides a graphical visualization of the Simulator project.</p>
+
+<div class="map-header">
+    <form method="post" action="/Simulation?handler=Previous">
+        <button>←</button>
+    </form>
+
+    <div class="turn">Turn @Model.CurrentTurn</div>
+
+    <form method="post" action="/Simulation?handler=Next">
+        <button>→</button>
+    </form>
+</div>
+
+<div class="map">
+    <!-- Check if the current state exists before rendering the map -->
+    @if (Model.CurrentState != null)
+    {
+        var positions = new Dictionary<(int, int), string>();
+        foreach (var creature in Model.CurrentState.Creatures)
+        {
+            var position = creature.Position;
+            positions[(position.X, position.Y)] = creature.ClassName; // Store class name for each position
+        }
+
+        for (int row = 7; row >= 0; row--)
+        {
+            <p>@row</p>
+            for (int col = 0; col < 6; col++)
+            {
+                var key = (col, row);
+                if (positions.ContainsKey(key))
+                {
+                    <div><img src="@Url.Content("~/css/" + positions[key].ToLower() + ".png")" alt="@positions[key]" /></div>
+                }
+                else
+                {
+                    <div></div>
+                }
+            }
+        }
+    }
+    else
+    {
+        <p>No simulation state found for this turn.</p>
+    }
+</div>
+
+<div class="map-header">
+    <span class="alert">Starting positions</span>
+</div>
+
+
+<!--@*@page
+@model SimWeb.Pages.SimulationModel
+@{
+    ViewData["Title"] = "Simulation";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>This site should provide a graphic visualization of Simulator project</p>
+
+<style>
+    .map {
+        grid-template-columns: max-content repeat(6, max-content);
+        grid-template-rows: repeat(8, 1fr) max-content;
+    }
+</style>
+
+<div class="map-header">
+    <form method="post" action="/Simulation?handler=Previous">
+    <button>←</button>
+    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8OXgpEVnWiZNlkdKQmfW_nHj-Pnht1dISiSqRsaa6x1XoJ-O8u-gK8tDDJYPyeIQBA_G8KL8s7-w4C3z_RIZVbXIKQrctysmSJHJBR6SdcU4X6vfbJK_kilwkCMwZzwi-bP2foTbRiixxiKWWAMYjTk">
+    </form>
+
+    <div class="turn">Turn 0</div>
+
+    <form method="post" action="/Simulation?handler=Next">
+    <button>→</button>
+    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8OXgpEVnWiZNlkdKQmfW_nHj-Pnht1dISiSqRsaa6x1XoJ-O8u-gK8tDDJYPyeIQBA_G8KL8s7-w4C3z_RIZVbXIKQrctysmSJHJBR6SdcU4X6vfbJK_kilwkCMwZzwi-bP2foTbRiixxiKWWAMYjTk">
+    </form>
+</div>
+
+<div class="map">
+    <p>7</p>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div><img src="~/css/eagle.png" alt="Eagles" /></div>
+    <div></div>
+    <div><img src="~/css/rabbit.png" alt="Rabbits" /></div>
+    <p>6</p>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <p>5</p>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <p>4</p>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <p>3</p>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <p>2</p>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <p>1</p>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <p>0</p>
+    <div></div>
+    <div><img src="~/css/orc.png" alt="Orc" /></div>
+    <div><img src="~/css/elf.png" alt="Elf" /></div>
+    <div></div>
+    <div></div>
+    <div><img src="~/css/ostrich.png" alt="Ostriches" /></div>
+    <span></span>
+    <span>0</span>
+    <span>1</span>
+    <span>2</span>
+    <span>3</span>
+    <span>4</span>
+    <span>5</span>
+</div>
+
+<div class="map-header">
+    <span class="alert">Starting positions</span>
+</div>
+*@-->
